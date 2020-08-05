@@ -11,5 +11,22 @@ CREATE TABLE departments
     PRIMARY KEY
     (id)
 );
+
     CREATE TABLE roles
-    CREATE TABLE employees
+    (
+        id INTEGER
+        AUTO_INCREMENT NOT NULL,
+        title VARCHAR
+        (30),
+        salary DECIMAL),
+        department_id INTEGER,
+
+        PRIMARY KEY
+        (id),
+
+        FOREIGN KEY
+        (department_id) REFERENCES department
+        (id),
+        );
+
+        CREATE TABLE employees
