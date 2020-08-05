@@ -3,5 +3,13 @@ CREATE DATABASE seed_db;
 USE seed_db;
 
 CREATE TABLE departments
-CREATE TABLE roles
-CREATE TABLE employees
+(
+    id INTEGER
+    AUTO_INCREMENT NOT NULL,
+    department VARCHAR
+    (30),
+    PRIMARY KEY
+    (id)
+);
+    CREATE TABLE roles
+    CREATE TABLE employees
