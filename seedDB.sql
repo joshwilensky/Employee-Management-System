@@ -1,0 +1,7 @@
+DROP DATABASE IF EXISTS seed_db;
+CREATE DATABASE seed_db;
+USE seed_db;
+
+CREATE TABLE departments
+CREATE TABLE roles
+CREATE TABLE employees
