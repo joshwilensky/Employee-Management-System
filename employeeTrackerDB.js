@@ -1,3 +1,4 @@
+// DEPENDENCIES================================================
 const mysql = require("mysql");
 const fs = require("fs");
 const cTable = require("console.table");
@@ -12,16 +13,18 @@ var connection = mysql.createConnection({
     database: "employee_tracker_db",
 });
 
+// CHECKING FOR A CONNECTION===================================
 connection.connect(function (err) {
     if (err) throw err;
-    console.log("connected as id " + connection.threadId);
-    afterConnection();
+    console.log("connected as id " + connection.threadId + "\n");
+    mainMenu();
 });
 
-function afterConnection() {
-    connection.query("SELECT * FROM songs", function (err, res) {
+// TEST IF THE DB IS WORKING===================================
+function mainMenu() {
+    connection.query("SELECT * FROM employee", function (err, res) {
         if (err) throw err;
-        console.log(res);
+        console.table(res);
         connection.end();
     });
 }
