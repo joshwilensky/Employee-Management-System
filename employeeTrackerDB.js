@@ -28,3 +28,25 @@ function mainMenu() {
         connection.end();
     });
 }
+
+// MAIN SECTION QUESTIONS======================================
+function mainMenu(response) {
+    return inquirer.prompt([{
+            type: "list",
+            message: "What would you like to do?",
+            name: "action",
+            choices: [
+                "View All Employees",
+                "View All Roles",
+                "View All Departments",
+                "Add an Employee",
+                "Add Role",
+                "Add Department",
+                "View All Employees by Department",
+                "Update an Employee's Role",
+                "Exit",
+            ]
+        },
+
+    ])
+}
