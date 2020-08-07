@@ -1,5 +1,6 @@
 // DEPENDENCIES================================================
 const mysql = require("mysql");
+const inquirer = require("inquirer");
 const fs = require("fs");
 const cTable = require("console.table");
 const sqlite = require("sql-formatter");
@@ -34,8 +35,7 @@ function mainMenu() {
 
 // MAIN SECTION QUESTIONS======================================
 function mainMenu(response) {
-    return inquirer
-        .prompt([{
+    return inquirer.prompt([{
                 type: "list",
                 message: "What would you like to do?",
                 name: "action",
@@ -98,6 +98,7 @@ function viewAllDepartments() {
     });
 }
 
+// EMPLOYEES=====================================================
 function addEmployee() {
     let roleArray = [];
     connection.query(
@@ -109,8 +110,7 @@ function addEmployee() {
             }
             console.log(roles);
 
-            inquirer
-                .prompt([{
+            inquirer.prompt([{
                         name: "firstname",
                         type: "input",
                         message: "Enter employee's first name:",
@@ -128,6 +128,7 @@ function addEmployee() {
                     },
                 ])
 
+                // QUESTIONS ARRAY TO ADD EMPLOYEES=====================
                 .then(function (reply) {
                     let deptId;
                     res.forEach((department => {
@@ -151,4 +152,80 @@ function addEmployee() {
                 });
         }
     );
+}
+
+// ROLES=========================================================
+function addRole() {
+    let departmentsArray = [];
+    connection.query("SELECT * FROM department", function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            departmentsArray.push(res[i].department_name);
+        }
+
+        inquirer.prompt([{
+                    type: "input",
+                    name: "role",
+                    message: "Enter a new role:",
+                },
+                {
+                    type: "input",
+                    name: "salary",
+                    message: "Enter the salary for this role:",
+                },
+                {
+                    type: "list",
+                    name: "department_id",
+                    message: "Which department is this role in?",
+                    choices: departmentsArray,
+                },
+            ])
+
+            .then(function (reply) {
+                let deptId;
+                res.forEach((department) => {
+                    if (department_name === reply.department_id) {
+                        console.log(department.id);
+                    }
+                    deptId = department.id;
+                });
+                connection.query(
+                    "INSERT INTO roles SET ?", {
+                        title: reply.role,
+                        salary: reply.salary,
+                        department_id: deptId,
+                    },
+                    function (err, res) {
+                        if (err) throw err;
+                        console.table("New role added.");
+                    }
+                );
+                mainMenu();
+            });
+    });
+}
+
+// DEPARTMENTS================================================
+function addDepartments() {
+    inquirer.prompt([{
+            name: "newDepartment",
+            message: "Enter new department name:",
+            type: "input",
+        }])
+
+        .then(function (reply) {
+            let newDepartment = [];
+            console.log("Adding a new department... \n");
+            newDepartment.push(reply.newDepartment);
+            connection.query(
+                "INSERT INTO department SET ?", {
+                    department_name: reply.newDepartment
+                },
+                function (err, res) {
+                    if (err) throw err;
+                    console.table(res.affectedRows + " department added \n");
+                    mainMenu();
+                }
+            );
+        });
 }
