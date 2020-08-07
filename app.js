@@ -229,3 +229,46 @@ function addDepartments() {
             );
         });
 }
+
+// VIEW ALL EMPLOYEES FUNCTION=======================================
+function viewEmployeesByDepartment() {
+    let departmentArray = [];
+    connection.query("SELECT * FROM department", function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            departmentArray.push(res[i].department_name);
+        }
+        console.log(departmentArray);
+        inquirer
+            .prompt([{
+                type: "list",
+                message: "Which department's employee would you like to see?",
+                choices: departmentArray,
+                name: "department",
+            }, ])
+            .then(function (reply) {
+                const departmentChoice = reply.department;
+                console.log(departmentChoice);
+                connection.query(
+                    `SELECT department_name, first_name, last_name FROM employee, department, roles WHERE department.id = department_id AND roles.id = role_id`,
+                    function (err, res) {
+                        if (err) throw err;
+                        const departmentName = [];
+                        for (i = 0; i < res.length; i++) {
+                            if (res[i].department_name === departmentChoice) {
+                                departmentName.push(res[i].first_name + " " + res[i].last_name);
+                            }
+                        }
+                        console.table(departmentName);
+                        mainMenu();
+                    }
+                );
+            });
+    });
+}
+
+function viewEmployeesByManager() {}
+
+function updateEmployeeRole() {
+    mainMenu();
+}
