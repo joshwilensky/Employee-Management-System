@@ -1,17 +1,13 @@
 const mysql = require("mysql");
 const fs = require("fs");
 const cTable = require("console.table");
-const sqlite = require("sql-formatter";)
+const sqlite = require("sql-formatter");
+const dotenv = require('dotenv');
+
 var connection = mysql.createConnection({
     host: "localhost",
-
-    // Your port; if not 3306
     port: 3306,
-
-    // Your username
     user: "root",
-
-    // Your password
     password: "Chopper11",
     database: "employee_tracker_db",
 });
