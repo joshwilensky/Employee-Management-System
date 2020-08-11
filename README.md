@@ -34,6 +34,8 @@ Developers are often tasked with creating interfaces that make it easy for non-d
 
 ### <a name="Screenshots"></a>Screenshots:
 
+![app js - 12-Employment-Management-System - Visual Studio Code 8_11_2020 4_14_47 PM](https://user-images.githubusercontent.com/66797344/89944458-dd9ce300-dbed-11ea-8edc-98199127b24e.png)
+
 ---
 
 ### <a name="Installation"></a>Installations:

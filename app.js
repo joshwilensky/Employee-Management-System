@@ -193,7 +193,7 @@ function employeesByManager() {
             managerID
         } = await inquirer.prompt([{
             type: "list",
-            message: "Choose an manager:",
+            message: "Choose a manager:",
             name: "managerID",
             choices: () => {
                 return employee.map((manager) => manager.manager_id);
@@ -215,7 +215,7 @@ function employeesByDepartment() {
             departmentName
         } = await inquirer.prompt([{
             type: "list",
-            message: "Choose a department:",
+            message: "Select a Department:",
             name: "departmentName",
             choices: () => {
                 return department.map((department) => department.name);
@@ -236,7 +236,7 @@ async function rmRole() {
             roleName
         } = await inquirer.prompt([{
             type: "list",
-            message: "Choose a role to delete:",
+            message: "Select a role to delete:",
             name: "roleName",
             choices: () => {
                 return role.map((role) => role.title);
@@ -261,7 +261,7 @@ function rmEmployee() {
             employeeName
         } = await inquirer.prompt([{
             type: "list",
-            message: "Choose an employee to remove:",
+            message: "Select an employee to delete:",
             name: "employeeName",
             choices: () => {
                 return employee.map((employee) => `${employee.last_name}`);
