@@ -1,21 +1,22 @@
 INSERT into
-  department (name)
+  department (department_name)
 VALUES
-  ('Executives'),
+  ('Executive'),
   ('Sales'),
   ('Finance'),
   ('Legal'),
   ('Marketing'),
   ('IT'),
-  ('HR')
+  ('HR');
+  
+  
 INSERT into
-  role (title, salary, department_id)
-VALUES
-  ('President', 400000, 1),
-  ('CEO', 400000, 1),
-  ('COO', 400000, 1),
-  ('CFO', 400000, 1),
-  ("Executive VP", 250000, 1),
+  roles (title, salary, department_id)
+VALUES ('President', 400000, 1),
+('CEO', 400000, 1),
+('COO', 400000, 1),
+('CFO', 400000, 1),
+('Executive VP', 250000, 1),
   ('Director of HR', 400000, 1),
   ('Director of Sales', 250000, 1),
   ('Director of Marketing', 250000, 1),
@@ -28,13 +29,15 @@ VALUES
   ('Lead Architect', 175000, 3),
   ("Tech Consultant", 90000, 3),
   ("Computer Programmer", 25000, 3),
-  ('Lawyer, 130000', 4),
+  ('Lawyer', 130000, 4),
   ('Legal Assistant', 60000, 4),
   ('Accountant', 130000, 5),
   ('HR Manager', 120000, 6),
   ('Marketing Manager', 120000, 7),
   ('Marketing Assistant', 45000, 7),
-  ('Secretary', 400000, 8)
+  ('Secretary', 400000, 7);
+  
+  
 INSERT into
   employee (first_name, last_name, role_id, manager_id)
 VALUES
@@ -61,14 +64,29 @@ VALUES
   ("Josh", "Clammer", 17, 3),
   ("Lily", "Santa-Monica", 18, 3),
   ("Ray", "Mustbeirish", 19, 3),
-  ("Derrick", "Avenguard", 19, 3)
-SELECT
-  R.id as role_id,
-  D.id as department_id,
-  R.title as Role,
-  R.salary,
-  D.name as Department_name
-FROM
-  Roles R,
-  JOIN Departments D,
-  ON R.department_id = D.id,
+  ("Derrick", "Avenguard", 19, 3);
+Select
+  employee.first_name,
+  employee.last_name,
+  roles.title,
+  roles.salary,
+  department.department_name,
+  employee_m.first_name as manager_firstname,
+  employee_m.last_name as manager_lastname
+from
+  employee
+  join roles on employee.role_id = roles.id
+  join department on roles.department_id = department.id
+  Left join employee as employee_m on employee.manager_id = employee_m.id;
+select
+  *
+from
+  department;
+select
+  *
+from
+  roles;
+select
+  *
+from
+  employee;
