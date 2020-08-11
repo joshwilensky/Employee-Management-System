@@ -40,23 +40,25 @@ Developers are often tasked with creating interfaces that make it easy for non-d
 
 I created the Employee Management System with npm packages: **MySQL**, **Node**, **Inquirer**, and **console.table** design pattern.
 
+---
+
 ### <a name="Usage"></a>Usages:
 
 Designed the following database schema containing three tables:
 
-- **department**:
+- **Department**:
 
   - **id** - INT PRIMARY KEY
   - **name** - VARCHAR(30) to hold department name
 
-- **role**:
+- **Role**:
 
   - **id** - INT PRIMARY KEY
   - **title** - VARCHAR(30) to hold role title
   - **salary** - DECIMAL to hold role salary
   - **department_id** - INT to hold reference to department role belongs to
 
-- **employee**:
+- **Employee**:
 
   - **id** - INT PRIMARY KEY
   - **first_name** - VARCHAR(30) to hold employee first name
